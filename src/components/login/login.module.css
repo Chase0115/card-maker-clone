@@ -1,0 +1,35 @@
+
+.login {
+  width: 30rem;
+  left: 50%;
+  top: 50%;
+}
+
+.body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 12rem;
+  color: darkgreen;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 1rem ;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.button {
+  width: 28rem;
+  height: 2rem;
+  border: 1 solid green;
+  border-radius: 20px;
+  padding: 0;
+  margin-bottom: 1rem;
+  background-color: white;
+  cursor: pointer;
+}

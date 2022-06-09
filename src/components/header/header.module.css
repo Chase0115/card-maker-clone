@@ -1,0 +1,22 @@
+
+
+.header {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  height: 7rem;
+  background-color: green;
+}
+
+.logo {
+  width: 5rem;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  color: white;
+  font-size: 2rem;
+}

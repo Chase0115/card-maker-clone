@@ -1,26 +1,26 @@
-
 import React from 'react';
-import { NavLink, Outlet } from "react-router-dom";
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import styles from './login.module.css'
 
-const Login = () => {
+const Login = ({ authService }) => {
+  const onLogin = (event) => {
+    authService.login(event.currentTarget.textContent)
+    .then(console.log);
+  }
   return (
-    <section>
-      <header>
-        <img src="/logo.png" alt="Logo" />
-        <p>Busines Card Maker</p>
-      </header>
-      <div>
-        <p>Login</p>
-        <button>Google</button>
-        <button>Github</button>
-      </div>
-      <footer>
-        code by Chase
-      </footer>
-      <NavLink to={"/login"} />
-      <Outlet />
+    <section className={styles.login}>
+      <Header/>
+        <section className={styles.body}>
+          <h1 className={styles.title}>Login</h1>
+          <ul className={styles.list}>
+            <li><button className={styles.button} onClick={onLogin}>Google</button></li>
+            <li><button className={styles.button} onClick={onLogin}>Github</button></li>
+          </ul>
+        </section>
+      <Footer/>
     </section>
-  )
-};
+  );
+}
 
 export default Login;

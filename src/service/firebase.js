@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 
 
 
@@ -9,4 +10,5 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+export default firebaseApp;

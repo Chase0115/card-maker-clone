@@ -33,14 +33,14 @@ const CardAddForm = ( { onAdd } ) =>{
     <form ref={formRef} className={styles.form}>
       <input ref={nameRef} className={styles.input} type="text" name="name" placeholder="Name" />
       <input ref={companyRef} className={styles.input} type="text" name="company" placeholder="Company" />
-      <select ref={themeRef} className={styles.select} name="theme" placeholder="Theme">
+      <select ref={themeRef} className={styles.select} name="theme" placeholder="Theme" >
         <option placeholder="light">light</option>
         <option placeholder="dark">dark</option>
         <option placeholder="colorful">colorful</option>
       </select>
       <input ref={titleRef} className={styles.input} type="text" name="title" placeholder="Title" />
       <input ref={emailRef} className={styles.input} type="text" name="email" placeholder="Email" />
-      <textarea ref={messageRef} className={styles.textarea} name="message" placeholder="Message"/>
+      <textarea ref={messageRef} className={styles.textarea} name="message" placeholder="Message" />
       <div className={styles.fileInput}>
         <ImageFileInput />
       </div>

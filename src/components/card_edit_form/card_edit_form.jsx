@@ -18,8 +18,7 @@ const  CardEditForm = ({ FileInput, card, updateCard, deleteCard }) =>{
     title, 
     email, 
     message, 
-    fileName, 
-    fileURL
+    fileName,
   } = card;
   
   const onSubmit = () => {

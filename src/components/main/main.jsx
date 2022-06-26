@@ -7,7 +7,7 @@ import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 
-const Main = ({ authService }) => {
+const Main = ({ FileInput, authService }) => {
   const [cards, setCards] = useState ({
     '1' : { 
       id: '1',
@@ -78,7 +78,7 @@ const Main = ({ authService }) => {
     <section className={styles.maker}>
       <Header onLogout={onLogout}/>
       <section className={styles.container}>
-        <Editor cards={cards} addCard={createOrUpdateCard} updateCard={createOrUpdateCard} deleteCard={deleteCard}/>
+        <Editor FileInput={FileInput} cards={cards} addCard={createOrUpdateCard} updateCard={createOrUpdateCard} deleteCard={deleteCard}/>
         <Preview cards={cards}/>
       </section>
       <Footer />

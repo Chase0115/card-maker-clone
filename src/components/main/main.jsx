@@ -2,47 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './main.module.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 
-const Main = ({ FileInput, authService }) => {
-  const [cards, setCards] = useState ({
-    '1' : { 
-      id: '1',
-      name: 'ellie',
-      company: 'Samsung',
-      theme: 'dark',
-      title: 'Software Engineer',
-      email: 'ellie@gmail.com',
-      message: 'go for it',
-      fileName: 'ellie',
-      fileURL: null
-    },
-    '2' : { 
-      id: '2',
-      name: 'ellie2',
-      company: 'Samsung',
-      theme: 'light',
-      title: 'Software Engineer',
-      email: 'ellie@gmail.com',
-      message: 'go for it',
-      fileName: 'ellie',
-      fileURL: null
-    } ,
-    '3' : { 
-      id: '3',
-      name: 'ellie3',
-      company: 'Samsung',
-      theme: 'colorful',
-      title: 'Software Engineer',
-      email: 'ellie@gmail.com',
-      message: 'go for it',
-      fileName: 'ellie',
-      fileURL: null
-    }
-  });
+const Main = ({ FileInput, authService, cardRepository }) => {
+  const location = useLocation();
+  const locationState = location?.state;
+  const [cards, setCards] = useState ({});
+  const [userId, setUserId] = useState(locationState && locationState.id);
 
   const navigate = useNavigate();
 
@@ -51,12 +20,24 @@ const Main = ({ FileInput, authService }) => {
   };
 
   useEffect(() => {
+    if(!userId) {
+      return;
+    }
+    const stopSync = cardRepository.syncCards(userId, cards => {
+      setCards(cards);
+    })
+    return () => stopSync();
+  }, [userId])
+
+  useEffect(() => {
     authService.onAuthChange(user => {
-      if(!user) {
-        navigate('/');
+      if(user) {
+        setUserId(locationState.id);
+      } else {
+        navigate('/')
       }
     })
-  })
+  }, [userId]);
 
   const createOrUpdateCard = card => {
     setCards(cards => {
@@ -64,6 +45,7 @@ const Main = ({ FileInput, authService }) => {
       updated[card.id] = card;
       return updated;
     });
+    cardRepository.saveCard(userId, card);
   }
 
   const deleteCard = card => {
@@ -72,6 +54,7 @@ const Main = ({ FileInput, authService }) => {
       delete updated[card.id]
       return updated;
     });
+    cardRepository.removeCard(userId, card);
   }
 
   return (
